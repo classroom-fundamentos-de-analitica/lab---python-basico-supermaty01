@@ -244,7 +244,7 @@ def pregunta_07():
             numeros[i[1]] = [i[0]]
     lista = []
     for numero in sorted(numeros.keys()):
-        lista.append((numero, numeros[numero]))
+        lista.append((int(numero), numeros[numero]))
     return lista
 
 def pregunta_08():
@@ -282,7 +282,7 @@ def pregunta_08():
             numeros[i[1]] = [i[0]]
     lista = []
     for numero in sorted(numeros.keys()):
-        lista.append((numero, sorted(set(numeros[numero]))))
+        lista.append((int(numero), sorted(set(numeros[numero]))))
     return lista
 
 
