@@ -21,7 +21,17 @@ def pregunta_01():
     214
 
     """
-    return
+    
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    suma = 0
+    for i in rows:
+        suma += int(i[1])
+    f.close()
+    return suma
 
 
 def pregunta_02():
@@ -39,7 +49,22 @@ def pregunta_02():
     ]
 
     """
-    return
+    
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    letras = {}
+    for i in rows:
+        if i[0] in letras.keys():
+            letras[i[0]] += 1
+        else:
+            letras[i[0]] = 1
+    lista = []
+    for letra in sorted(letras.keys()):
+        lista.append((letra, letras[letra]))
+    return lista
 
 
 def pregunta_03():
@@ -57,8 +82,21 @@ def pregunta_03():
     ]
 
     """
-    return
-
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    letras = {}
+    for i in rows:
+        if i[0] in letras.keys():
+            letras[i[0]] += int(i[1])
+        else:
+            letras[i[0]] = int(i[1])
+    lista = []
+    for letra in sorted(letras.keys()):
+        lista.append((letra, letras[letra]))
+    return lista
 
 def pregunta_04():
     """
@@ -82,7 +120,21 @@ def pregunta_04():
     ]
 
     """
-    return
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    meses = {}
+    for i in rows:
+        if i[2].split('-')[1] in meses.keys():
+            meses[i[2].split('-')[1]] += 1
+        else:
+            meses[i[2].split('-')[1]] = 1
+    lista = []
+    for mes in sorted(meses.keys()):
+        lista.append((mes, meses[mes]))
+    return lista
 
 
 def pregunta_05():
@@ -100,7 +152,21 @@ def pregunta_05():
     ]
 
     """
-    return
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    letras = {}
+    for i in rows:
+        if i[0] in letras.keys():
+            letras[i[0]].append(int(i[1]))
+        else:
+            letras[i[0]] = [int(i[1])]
+    lista = []
+    for letra in sorted(letras.keys()):
+        lista.append((letra, max(letras[letra]), min(letras[letra])))
+    return lista
 
 
 def pregunta_06():
@@ -125,8 +191,24 @@ def pregunta_06():
     ]
 
     """
-    return
-
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    letras = {}
+    for i in rows:
+        filaLetras = i[4].split(',')
+        for j in filaLetras:
+            caracteres, valor = j.split(':')
+            if caracteres in letras.keys():
+                letras[caracteres].append(int(valor))
+            else:
+                letras[caracteres] = [int(valor)]
+    lista = []
+    for letra in sorted(letras.keys()):
+        lista.append((letra, min(letras[letra]), max(letras[letra])))
+    return lista
 
 def pregunta_07():
     """
@@ -149,8 +231,21 @@ def pregunta_07():
     ]
 
     """
-    return
-
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    numeros = {}
+    for i in rows:
+        if i[1] in numeros.keys():
+            numeros[i[1]].append(i[0])
+        else:
+            numeros[i[1]] = [i[0]]
+    lista = []
+    for numero in sorted(numeros.keys()):
+        lista.append((numero, numeros[numero]))
+    return lista
 
 def pregunta_08():
     """
@@ -174,7 +269,22 @@ def pregunta_08():
     ]
 
     """
-    return
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    numeros = {}
+    for i in rows:
+        if i[1] in numeros.keys():
+            numeros[i[1]].append(i[0])
+        else:
+            numeros[i[1]] = [i[0]]
+    lista = []
+    for numero in sorted(numeros.keys()):
+        lista.append((numero, sorted(set(numeros[numero]))))
+    return lista
+
 
 
 def pregunta_09():
@@ -197,7 +307,22 @@ def pregunta_09():
     }
 
     """
-    return
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    letras = {}
+    for i in rows:
+        filaLetras = i[4].split(',')
+        for j in filaLetras:
+            caracteres, valor = j.split(':')
+            if caracteres in letras.keys():
+                letras[caracteres] += 1
+            else:
+                letras[caracteres] = 1
+
+    return letras
 
 
 def pregunta_10():
@@ -218,8 +343,16 @@ def pregunta_10():
 
 
     """
-    return
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    result = []
+    for i in rows:
+        result.append((i[0], len(i[3].split(',')), len(i[4].split(','))))
 
+    return result
 
 def pregunta_11():
     """
@@ -239,8 +372,19 @@ def pregunta_11():
 
 
     """
-    return
-
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    result = {}
+    for row in rows:
+        for letter in row[3].split(','):
+            if letter in result.keys():
+                result[letter] += int(row[1])
+            else:
+                result[letter] = int(row[1])
+    return result
 
 def pregunta_12():
     """
@@ -257,4 +401,18 @@ def pregunta_12():
     }
 
     """
-    return
+    f = open("data.csv", "r")
+    text = f.read()
+    rows = text.split('\n')
+    rows = list(map(lambda x: x.split('\t'), rows))
+    rows.pop()
+    result = {}
+    for row in rows:
+        for elem in row[4].split(','):
+            letras, valor = elem.split(':')
+            if row[0] in result.keys():
+                result[row[0]] += int(valor)
+            else:
+                result[row[0]] = int(valor)
+    return result
+
